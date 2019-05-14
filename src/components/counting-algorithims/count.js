@@ -1,10 +1,10 @@
 function consecutiveDown(array, row, column, player, count = 0) {
-    column--
+    row--
     if (count === 3) {
         return true
-    } else if (column === -1) {
+    } else if (row === -1) {
         return false
-    } else if (this.state.board[row][column] !== player) {
+    } else if (array[column][row] !== player) {
         return false
     }
 
@@ -14,13 +14,13 @@ function consecutiveDown(array, row, column, player, count = 0) {
 }
 
 function consecutiveLeft(array, row, column, player, count = 0){
-    row--
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
+    column--
+    let arrayCol = array[column]
+    if (arrayCol === undefined) return count
 
-    let arrayCol = arrayRow[column]
+    let arrayRow = arrayCol[row]
 
-    if (arrayCol === undefined || arrayCol !== player) return count
+    if (arrayRow === undefined || arrayRow !== player) return count
 
     count++
 
@@ -28,13 +28,13 @@ function consecutiveLeft(array, row, column, player, count = 0){
 }
 
 function consecutiveRight(array, row, column, player, count = 0){
-    row++
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
+    column++
+    let arrayCol = array[column]
+    if (arrayCol === undefined) return count
 
-    let arrayCol = arrayRow[column]
+    let arrayRow = arrayCol[row]
 
-    if (arrayCol === undefined || arrayCol !== player) return count
+    if (arrayRow === undefined || arrayRow !== player) return count
 
     count++
 
@@ -45,12 +45,12 @@ function consecutiveLeftDown(array, row, column, player, count = 0){
     row--
     column--
 
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
+    let arrayCol = array[column]
+    if (arrayCol === undefined) return count
 
-    let arrayCol = arrayRow[column]
+    let arrayRow = arrayCol[row]
 
-    if (arrayCol === undefined || arrayCol !== player) return count
+    if (arrayRow === undefined || arrayRow !== player) return count
 
     count++
     return consecutiveLeftDown(array, row, column, player, count)
@@ -60,42 +60,42 @@ function consecutiveRightUp(array, row, column, player, count = 0){
     row++
     column++
 
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
+    let arrayCol = array[column]
+    if (arrayCol === undefined) return count
 
-    let arrayCol = arrayRow[column]
+    let arrayRow = arrayCol[row]
 
-    if (arrayCol === undefined || arrayCol !== player) return count
+    if (arrayRow === undefined || arrayRow !== player) return count
 
     count++
     return consecutiveRightUp(array, row, column, player, count)
 }
 
 function consecutiveRightDown(array, row, column, player, count = 0){
-    row++
-    column--
+    row--
+    column++
 
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
+    let arrayCol = array[column]
+    if (arrayCol === undefined) return count
 
-    let arrayCol = arrayRow[column]
+    let arrayRow = arrayCol[row]
 
-    if (arrayCol === undefined || arrayCol !== player) return count
+    if (arrayRow === undefined || arrayRow !== player) return count
 
     count++
     return consecutiveRightDown(array, row, column, player, count)
 }
 
 function consecutiveLeftUp(array, row, column, player, count = 0){
-    row--
-    column++
+    row++
+    column--
 
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined || row < 0) return count
+    let arrayCol = array[column]
+    if (arrayCol === undefined) return count
 
-    let arrayCol = arrayRow[column]
+    let arrayRow = arrayCol[row]
 
-    if (arrayCol === undefined || arrayCol !== player) return count
+    if (arrayRow === undefined || arrayRow !== player) return count
 
     count++
     return consecutiveLeftUp(array, row, column, player, count)

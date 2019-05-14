@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Column = ({addToColumn, number}) => {
-    return (<div onClick={()=>addToColumn(number)}>
+const Column = ({ setTurn, number}) => {
+    return (<div onClick={() => setTurn(number)}>
         {number}
     </div>)
 }

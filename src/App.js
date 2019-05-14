@@ -16,11 +16,12 @@ class App extends Component {
     super(props)
 
     this.state = {
-      board: [ [], [], [], [], [], [], [] ],
+      board: [ [1], [1, 1], [2, 1], [1, 2, 2, 1], [], [], [] ],
       player: 1,
       gameOver: false,
       lastRow: 0,
-      lastColumn: 0
+      lastColumn: 0,
+      columnFull: false
     }
   }
 
@@ -30,8 +31,18 @@ class App extends Component {
       player: 1,
       gameOver: false,
       lastRow: 0,
-      lastColumn: 0
+      lastColumn: 0,
+      columnFull: false
     })
+  }
+
+  setTurn = (number) =>{
+    this.addToColumn(number)
+    
+    if(this.state.columnFull === false){
+      this.checkBoard()
+      
+    }
   }
 
   addToColumn = (number) => {
@@ -40,7 +51,10 @@ class App extends Component {
       column = [...column, this.state.player]
       const lastRow = column.length - 1
       const board = [...this.state.board.slice(0, number), column, ...this.state.board.slice(number + 1)]
-      this.setState({ board, lastRow, lastColumn: number })
+      
+      this.setState({ board, lastRow, lastColumn: number, columnFull: false })
+    } else{
+      this.setState({columnFull: true})
     }
     
   }
@@ -51,6 +65,7 @@ class App extends Component {
     const horizontalCheck = consecutiveLeft(board, lastRow, lastColumn, player) + consecutiveRight(board, lastRow, lastColumn, player)
     const backslashCheck = consecutiveLeftDown(board, lastRow, lastColumn, player) + consecutiveRightUp(board, lastRow, lastColumn, player)
     const forwardSlashCheck = consecutiveRightDown(board, lastRow, lastColumn, player) + consecutiveLeftUp(board, lastRow, lastColumn, player)
+    console.log(verticalCheck, horizontalCheck, backslashCheck, forwardSlashCheck)
     if (verticalCheck || horizontalCheck >= 3 || backslashCheck >= 3 || forwardSlashCheck >=3){
       this.setState({gameOver: true})
     }
@@ -65,7 +80,6 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state)
     return (
       <div>
       {this.state.board.map((column, value) => { 
@@ -73,7 +87,7 @@ class App extends Component {
           key={value} 
           number={value} 
           pieces={column} 
-          addToColumn={this.addToColumn}
+          setTurn={this.setTurn}
         />
       })}
       </div>
