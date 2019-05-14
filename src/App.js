@@ -1,5 +1,15 @@
 import React, { Component }  from 'react';
 import './App.css';
+import Column from './components/Column';
+import {
+  consecutiveDown, 
+  consecutiveLeft, 
+  consecutiveRight, 
+  consecutiveLeftDown, 
+  consecutiveRightUp, 
+  consecutiveRightDown, 
+  consecutiveLeftUp 
+} from './components/counting-algorithims/count'
 
 class App extends Component {
   constructor(props){
@@ -24,133 +34,48 @@ class App extends Component {
     })
   }
 
-  toggleUser(){
-    if (this.state.player === 1){
+  addToColumn = (number) => {
+    let column = this.state.board[number]
+    if (column.length < 6){
+      column = [...column, this.state.player]
+      const lastRow = column.length - 1
+      const board = [...this.state.board.slice(0, number), column, ...this.state.board.slice(number + 1)]
+      this.setState({ board, lastRow, lastColumn: number })
+    }
+    
+  }
+
+  checkBoard = () => {
+    const { board, lastRow, lastColumn, player} = this.state
+    const verticalCheck = consecutiveDown(board, lastRow, lastColumn, player)
+    const horizontalCheck = consecutiveLeft(board, lastRow, lastColumn, player) + consecutiveRight(board, lastRow, lastColumn, player)
+    const backslashCheck = consecutiveLeftDown(board, lastRow, lastColumn, player) + consecutiveRightUp(board, lastRow, lastColumn, player)
+    const forwardSlashCheck = consecutiveRightDown(board, lastRow, lastColumn, player) + consecutiveLeftUp(board, lastRow, lastColumn, player)
+    if (verticalCheck || horizontalCheck >= 3 || backslashCheck >= 3 || forwardSlashCheck >=3){
+      this.setState({gameOver: true})
+    }
+  }
+
+  toggleUser() {
+    if (this.state.player === 1) {
       this.setState({ player: 2 })
-    } else{
+    } else {
       this.setState({ player: 1 })
     }
   }
 
-  consecutiveLeft(row, column, player = 1, count = 0, ) {
-    row--
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
-
-    let arrayCol = arrayRow[column]
-
-    if (arrayCol === undefined || arrayCol !== player) return count
-
-    count++
-
-    return this.consecutiveLeft(row, column, player, count)
-  }
-
-  consecutiveRight(row, column, player = 1, count = 0) {
-    row++
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
-
-    let arrayCol = arrayRow[column]
-
-    if (arrayCol === undefined || arrayCol !== player) return count
-
-    count++
-
-    return this.consecutiveRight(row, column, player, count)
-  }
-
-  consecutiveDown(row, column, player, count = 0) {
-    column--
-    if (count === 3) {
-      return true
-    } else if (column === -1) {
-      return false
-    } else if (this.state.board[row][column] !== player) {
-      return false
-    }
-
-    count++
-
-    return this.consecutiveDown(row, column, player, count)
-  }
-
-  consecutiveLeftDown(row, column, player, count = 0) {
-    row--
-    column--
-
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
-
-    let arrayCol = arrayRow[column]
-
-    if (arrayCol === undefined || arrayCol !== player) return count
-
-    count++
-    return this.consecutiveLeftDown(row, column, player, count)
-  }
-
-  consecutiveRightUp(row, column, player, count = 0) {
-    row++
-    column++
-
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
-
-    let arrayCol = arrayRow[column]
-
-    if (arrayCol === undefined || arrayCol !== player) return count
-
-    count++
-    return this.consecutiveRightUp(row, column, player, count)
-  }
-
-  consecutiveRightDown(row, column, player, count = 0) {
-    row++
-    column--
-
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined) return count
-
-    let arrayCol = arrayRow[column]
-
-    if (arrayCol === undefined || arrayCol !== player) return count
-
-    count++
-    return this.consecutiveRightDown(row, column, player, count)
-  }
-
-  consecutiveLeftUp(row, column, player, count = 0) {
-    row--
-    column++
-
-    let arrayRow = this.state.board[row]
-    if (arrayRow === undefined || row < 0) return count
-
-    let arrayCol = arrayRow[column]
-
-    if (arrayCol === undefined || arrayCol !== player) return count
-
-    count++
-    return this.consecutiveLeftUp(row, column, player, count)
-  }
-
   render(){
+    console.log(this.state)
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+      {this.state.board.map((column, value) => { 
+        return <Column 
+          key={value} 
+          number={value} 
+          pieces={column} 
+          addToColumn={this.addToColumn}
+        />
+      })}
       </div>
     );
   }
