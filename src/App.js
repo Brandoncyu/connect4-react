@@ -78,10 +78,9 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state.player, this.state.gameOver)
     return (
-      <Container>
-        <Row>
+      <Container fluid>
+        <Row className="board" noGutters={'false'}>
           {this.state.board.map((column, value) => { 
             return <Column 
               key={value} 
