@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import './App.css';
-import Column from './components/Column';
+import Board from './components/Board';
 import {
   consecutiveDown, 
   consecutiveLeft, 
@@ -10,7 +10,7 @@ import {
   consecutiveRightDown, 
   consecutiveLeftUp 
 } from './components/counting-algorithims/count'
-import {Container, Row} from 'reactstrap'
+import {Container, Row, Col, Button} from 'reactstrap'
 
 class App extends Component {
   constructor(props){
@@ -20,20 +20,14 @@ class App extends Component {
       board: [ [], [], [], [], [], [], [] ],
       player: 1,
       gameOver: false,
-      lastRow: 0,
-      lastColumn: 0,
-      columnFull: false
     }
   }
 
-  resetBoard(){
+  resetBoard = () => {
     this.setState({
       board: [[], [], [], [], [], [], []],
       player: 1,
       gameOver: false,
-      lastRow: 0,
-      lastColumn: 0,
-      columnFull: false
     })
   }
 
@@ -61,7 +55,6 @@ class App extends Component {
     const horizontalCheck = consecutiveLeft(board, lastRow, lastColumn, player) + consecutiveRight(board, lastRow, lastColumn, player)
     const backslashCheck = consecutiveLeftDown(board, lastRow, lastColumn, player) + consecutiveRightUp(board, lastRow, lastColumn, player)
     const forwardSlashCheck = consecutiveRightDown(board, lastRow, lastColumn, player) + consecutiveLeftUp(board, lastRow, lastColumn, player)
-    console.log(verticalCheck, horizontalCheck, backslashCheck, forwardSlashCheck)
     if (verticalCheck || horizontalCheck >= 3 || backslashCheck >= 3 || forwardSlashCheck >=3){
       return true
     } else{
@@ -79,17 +72,25 @@ class App extends Component {
 
   render(){
     return (
-      <Container fluid>
-        <Row className="board" noGutters={'false'}>
-          {this.state.board.map((column, value) => { 
-            return <Column 
-              key={value} 
-              number={value} 
-              pieces={column} 
+      <Container >
+        <h1 id="title">Connect Four!</h1>
+        <Row>
+          <Col lg="9" >
+            <Board
+              board={this.state.board}
               gameOver={this.state.gameOver}
               addToColumn={this.addToColumn}
             />
-          })}
+          </Col>
+          <Col lg="3"  >
+            <div className="status" >
+              <h3>Player {this.state.player}'s turn</h3>
+              <div className="turnSquare">
+                <div className="turnCircle" style={{background:'blue'}}></div>
+              </div>
+              <Button color="primary" size="lg" onClick={this.resetBoard}>Reset Game!</Button>
+            </div>
+          </Col>
         </Row>
       </Container>
     );
