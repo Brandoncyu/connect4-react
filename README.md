@@ -1,68 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![screenshot](./photos/splash-image.png)
 
-## Available Scripts
+This is a Connect Four game built on React. Two players will be able to use this game.
 
-In the project directory, you can run:
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+What things you need to install the software and how to install them
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* fork and clone this repository
 
-### `npm run build`
+### Installing
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install the Node dependencies:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```shell
+* run npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start the react development server:
 
-### `npm run eject`
+```shell
+* npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Key Features
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+When the game begins, you will be presented with a board that is empty. The player number and color will be on the status bar on the right.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![screenshot](./photos/empty.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Click the column you want to put your first piece in. It will then populate in the lowest row. The status bar will then toggle to the next player, who can then make his or her move.
 
-## Learn More
+![screenshot](./photos/first-move.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can keep going until there is a winner. You can win by having four or more in a row horizontally, vertically, or diagnoally. When it happens, the status bar will update on the right, denoting the winner. You will not be able to make any more moves on the board.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![screenshot](./photos/splash-image.png)
 
-### Code Splitting
+If you fill up an entire column, you can still click on the same column, but you will not be able to fill it up anymore. The player will not toggle to the next one.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![screenshot](./photos/full-column.png)
 
-### Analyzing the Bundle Size
+When the game is over, you can hit the "Reset Game!" button on the status bar. This will empty out the board and start with the first player once again. You can also do this mid-game as well.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Built With
 
-### Making a Progressive Web App
+* [JavaScript](https://www.javascript.com/) - The language
+* [Bootstrap](https://bootstrap.com/) - The css framework used
+* [React](https://reactjs.org/) - Frontend library
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Contributing
 
-### Advanced Configuration
+Please send me a message for details on our code of conduct, and the process for submitting pull requests.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Author
 
-### Deployment
+* **Brandon Yu** - *Initial work* - [Brandoncyu](https://github.com/Brandoncyu)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## License
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
