@@ -11,12 +11,14 @@
   margin-left: 20px;
 }
 
+#winner{
+  color: red
+}
+
 .status{
   padding: 20px;
   background: white;
   text-align: center;
-  margin-left: auto; 
-  margin-right: auto
 }
 
 
@@ -40,21 +42,11 @@
   border-radius: 50%;
 }
 
-.turnSquare {
-  position: relative;
-  height:50px;
-  width: 100%;
-}
-
-.turnSquare:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-}
 
 .turnCircle {
-  position: absolute;
-  height: 100%;
-  background: red;
-  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+  width: 50px;
+  margin-bottom: 10px
 }

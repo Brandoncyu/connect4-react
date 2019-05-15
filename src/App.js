@@ -9,7 +9,7 @@ import {
   consecutiveRightUp, 
   consecutiveRightDown, 
   consecutiveLeftUp 
-} from './components/counting-algorithims/count'
+} from './algorithims/count'
 import {Container, Row, Col, Button} from 'reactstrap'
 
 class App extends Component {
@@ -40,7 +40,7 @@ class App extends Component {
       const board = [...this.state.board.slice(0, columnNumber), column, ...this.state.board.slice(columnNumber + 1)]
       
       let gameOver = this.checkBoard(board, lastRow, columnNumber, this.state.player)
-      console.log(gameOver)
+      
       if (gameOver){
         this.setState({ board, gameOver })
       } else{
@@ -84,10 +84,10 @@ class App extends Component {
           </Col>
           <Col lg="3"  >
             <div className="status" >
-              <h3>Player {this.state.player}'s turn</h3>
-              <div className="turnSquare">
-                <div className="turnCircle" style={{background:'blue'}}></div>
-              </div>
+              {!this.state.gameOver ? <h3>Player {this.state.player}'s turn</h3> : <h1 id="winner">Player {this.state.player} wins!</h1>}
+              
+              {this.state.player === 1 ? <div className="turnCircle" style={{ background: 'red' }} ></div> : <div className="turnCircle" style={{ background: 'black' }} ></div>}
+          
               <Button color="primary" size="lg" onClick={this.resetBoard}>Reset Game!</Button>
             </div>
           </Col>
