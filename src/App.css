@@ -1,4 +1,4 @@
-.board{
+#board{
   width: 700px;
   margin-left: auto; 
   margin-right: auto
@@ -43,7 +43,7 @@
 }
 
 
-.turnCircle {
+#turnCircle {
   margin-left: auto;
   margin-right: auto;
   height: 50px;
