@@ -1,7 +1,7 @@
 ![screenshot](./photos/splash-image.png)
 
 This is a Connect Four game built on React. Two players will be able to use this game.
-
+Test!
 
 ## Getting Started
 
