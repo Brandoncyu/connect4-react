@@ -105,8 +105,8 @@ class App extends Component {
               }
               {/* This toggles the player's color */}
               { this.state.player === 1 ? 
-                <div id="turnCircle" style={{ background: 'red' }} ></div> : 
-                <div id="turnCircle" style={{ background: 'black' }} ></div>
+                <div id="turnSquare" style={{ background: 'red' }} ></div> : 
+                <div id="turnSquare" style={{ background: 'black' }} ></div>
               }
           
               <Button color="primary" size="lg" onClick={this.resetBoard}>Reset Game!</Button>
