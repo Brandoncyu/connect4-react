@@ -2,9 +2,11 @@
 
 This is a Connect Four game built on React. Two players will be able to use this game.
 
+A version of this game built in Vanilla JavaScript. You can find it [here](https://github.com/Brandoncyu/connect4-vanilla).
+
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
@@ -17,13 +19,13 @@ What things you need to install the software and how to install them
 Install the Node dependencies:
 
 ```shell
-* run npm install
+run npm install
 ```
 
 Start the react development server:
 
 ```shell
-* npm start
+npm start
 ```
 
 ## Key Features
