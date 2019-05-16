@@ -38,7 +38,7 @@ class App extends Component {
     // The "columnNumber" variable that is passed in is the index the column arrray occupies in this.state.board. For example, if the state is [[1,2,1], [2,1], [1], [], [], [], []], the columnNumber for '[1,2,1]' is 0, '[2, 1]' is 1, '[1]' is 2, etc.
     let column = this.state.board[columnNumber]
 
-    //this below is to make sure that the column isnt full, and to make sure the game isn't over. If either of these conditions are false, it will not allow you to update the column, nor will you toggle th euser.
+    //this below is to make sure that the column isnt full, and to make sure the game isn't over. If either of these conditions are false, it will not allow you to update the column, nor will you toggle the user.
     if (column.length < 6 && !this.state.gameOver){
       //this below adds the player number to the appropriate column.
       column = [...column, this.state.player]
@@ -49,7 +49,7 @@ class App extends Component {
       //this below adds the array back to a copy of the original board.
       const board = [...this.state.board.slice(0, columnNumber), column, ...this.state.board.slice(columnNumber + 1)]
       
-      //this below checks to see if the newest piece added to the board completes a sequence of four consecutive pieces.the larger algorithim is below. If a sequence is found it will return "true", otherwise it will return "false"
+      //this below checks to see if the newest piece added to the board completes a sequence of four consecutive pieces. The larger algorithm is below. If a sequence is found it will return "true", otherwise it will return "false"
       let gameOver = this.checkBoard(board, lastRow, columnNumber, this.state.player)
       
       //if game over returns "true", the board will update with the latest piece, but you will not be able to update it anymore. Otherwise the board will be updated with the latest piece and you will toggle to the next user.
@@ -65,7 +65,7 @@ class App extends Component {
   checkBoard = (board, lastRow, lastColumn, player) => {
     //These functions check if the consecutive pieces horizontally, vertically, or diagonally are equal to the new piece. The functions should return a value. If any of the new combined variables are 3 or greater, then we have a connection of four consecutive pieces. This function will then return "true" 
     
-    //The only exception is verticalCheck, which does not require combining a check in a different direction, so the logic is inheret to its function. It should only return "true" or "false"
+    //The only exception is verticalCheck, which does not require combining a check in a different direction, so the logic is inherent to its function. It should only return "true" or "false"
     const verticalCheck = consecutiveDown(board, lastRow, lastColumn, player)
 
     const horizontalCheck = consecutiveLeft(board, lastRow, lastColumn, player) + consecutiveRight(board, lastRow, lastColumn, player)
