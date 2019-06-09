@@ -10,7 +10,7 @@ import {
   consecutiveRightDown, 
   consecutiveLeftUp 
 } from './algorithims/count'
-import {Container, Row, Col, Button} from 'reactstrap'
+import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 class App extends Component {
   constructor(props){
@@ -19,14 +19,16 @@ class App extends Component {
     this.state = {
       board: [ [], [], [], [], [], [], [] ],
       player: 1,
+      gameStart: true,
       gameOver: false,
-      computer: true
+      computerPlayer: false
     }
   }
 
   componentDidUpdate(){
-    if (this.state.player === 2 && this.state.computer) {
-      this.computerTurn()
+    clearTimeout(this.timeout)
+    if (this.state.player === 2 && this.state.computerPlayer) {
+      this.timeout = setTimeout(()=>this.computerTurn(), 500)
     }
   }
 
@@ -34,7 +36,9 @@ class App extends Component {
     this.setState({
       board: [[], [], [], [], [], [], []],
       player: 1,
+      gameStart: true,
       gameOver: false,
+      computer: false,
     })
   }
 
@@ -83,12 +87,30 @@ class App extends Component {
       random = Math.random() * 7
       column = Math.floor(random)
     }
-    setTimeout(()=>this.addToColumn(column), 2000)
+    this.addToColumn(column)
+  }
+
+  toggle(computerPlayer) {
+    this.setState(prevState => ({
+      modal: !prevState.modal,
+      gameStart: false,
+      computerPlayer
+    }));
   }
 
   render(){
     return (
       <Container >
+        <Modal isOpen={this.state.gameStart} toggle={() => this.toggle(false)} className={this.props.className} centered={true}>
+          <ModalHeader toggle={() => this.toggle(false)}>Connect Four!</ModalHeader>
+          <ModalBody>
+            How Many Players Want to Connect Four?
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" size="md" onClick={()=>this.toggle(true)}>One Player</Button>{' '}
+            <Button color="success" size="md" onClick={()=>this.toggle(false)}>Two Players</Button>
+          </ModalFooter>
+        </Modal>
         <h1 id="title">Connect Four!</h1>
         <Row>
           <Col lg="9" >
