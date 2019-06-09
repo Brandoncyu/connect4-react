@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import './App.css';
 import Board from './components/Board';
+import StartModal from './components/StartModal'
 import {
   consecutiveDown, 
   consecutiveLeft, 
@@ -10,7 +11,7 @@ import {
   consecutiveRightDown, 
   consecutiveLeftUp 
 } from './algorithims/count'
-import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Container, Row, Col, Button } from 'reactstrap'
 
 class App extends Component {
   constructor(props){
@@ -23,6 +24,8 @@ class App extends Component {
       gameOver: false,
       computerPlayer: false
     }
+
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   componentDidUpdate(){
@@ -90,27 +93,20 @@ class App extends Component {
     this.addToColumn(column)
   }
 
-  toggle(computerPlayer) {
-    this.setState(prevState => ({
-      modal: !prevState.modal,
+  toggleModal(computerPlayer) {
+    this.setState({
       gameStart: false,
       computerPlayer
-    }));
+    });
   }
 
   render(){
     return (
       <Container >
-        <Modal isOpen={this.state.gameStart} toggle={() => this.toggle(false)} className={this.props.className} centered={true}>
-          <ModalHeader toggle={() => this.toggle(false)}>Connect Four!</ModalHeader>
-          <ModalBody>
-            How Many Players Want to Connect Four?
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" size="md" onClick={()=>this.toggle(true)}>One Player</Button>{' '}
-            <Button color="success" size="md" onClick={()=>this.toggle(false)}>Two Players</Button>
-          </ModalFooter>
-        </Modal>
+        <StartModal
+          gameStart={this.state.gameStart}
+          toggleModal={this.toggleModal}
+        /> 
         <h1 id="title">Connect Four!</h1>
         <Row>
           <Col lg="9" >
