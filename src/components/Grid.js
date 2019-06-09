@@ -5,7 +5,7 @@ const Grid = ({ number }) => {
     const color = ['white', 'red', 'black']
     const background = color[number]
     return (<Row>    
-        <div id="square" className="square">
+        <div className="square">
             <div className="grid-circle" style={{ background }}></div>
         </div>
     </Row>)

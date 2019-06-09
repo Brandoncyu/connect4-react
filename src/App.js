@@ -26,6 +26,7 @@ class App extends Component {
     }
 
     this.toggleModal = this.toggleModal.bind(this)
+    this.addToColumn = this.addToColumn.bind(this)
   }
 
   componentDidUpdate(){
@@ -114,6 +115,7 @@ class App extends Component {
               board={this.state.board}
               gameOver={this.state.gameOver}
               addToColumn={this.addToColumn}
+              player={this.state.player}
             />
           </Col>
           <Col lg="3"  >
