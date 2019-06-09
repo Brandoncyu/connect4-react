@@ -20,6 +20,13 @@ class App extends Component {
       board: [ [], [], [], [], [], [], [] ],
       player: 1,
       gameOver: false,
+      computer: true
+    }
+  }
+
+  componentDidUpdate(){
+    if (this.state.player === 2 && this.state.computer) {
+      this.computerTurn()
     }
   }
 
@@ -66,6 +73,17 @@ class App extends Component {
   toggleUser() {
     const player = (this.state.player % 2) + 1
     this.setState({player})
+  }
+
+  computerTurn(){
+    let random = Math.random() * 7
+    let column = Math.floor(random)
+    
+    while(this.state.board[column].length === 6){
+      random = Math.random() * 7
+      column = Math.floor(random)
+    }
+    setTimeout(()=>this.addToColumn(column), 2000)
   }
 
   render(){
