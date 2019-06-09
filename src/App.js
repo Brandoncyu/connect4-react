@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import './App.css';
 import Board from './components/Board';
+import StartModal from './components/StartModal'
 import {
   consecutiveDown, 
   consecutiveLeft, 
@@ -10,7 +11,7 @@ import {
   consecutiveRightDown, 
   consecutiveLeftUp 
 } from './algorithims/count'
-import {Container, Row, Col, Button} from 'reactstrap'
+import { Container, Row, Col, Button } from 'reactstrap'
 
 class App extends Component {
   constructor(props){
@@ -19,7 +20,19 @@ class App extends Component {
     this.state = {
       board: [ [], [], [], [], [], [], [] ],
       player: 1,
+      gameStart: true,
       gameOver: false,
+      computerPlayer: false
+    }
+
+    this.toggleModal = this.toggleModal.bind(this)
+    this.addToColumn = this.addToColumn.bind(this)
+  }
+
+  componentDidUpdate(){
+    clearTimeout(this.timeout)
+    if (this.state.player === 2 && this.state.computerPlayer) {
+      this.timeout = setTimeout(()=>this.computerTurn(), 500)
     }
   }
 
@@ -27,7 +40,9 @@ class App extends Component {
     this.setState({
       board: [[], [], [], [], [], [], []],
       player: 1,
+      gameStart: true,
       gameOver: false,
+      computer: false,
     })
   }
 
@@ -68,9 +83,31 @@ class App extends Component {
     this.setState({player})
   }
 
+  computerTurn(){
+    let random = Math.random() * 7
+    let column = Math.floor(random)
+    
+    while(this.state.board[column].length === 6){
+      random = Math.random() * 7
+      column = Math.floor(random)
+    }
+    this.addToColumn(column)
+  }
+
+  toggleModal(computerPlayer) {
+    this.setState({
+      gameStart: false,
+      computerPlayer
+    });
+  }
+
   render(){
     return (
       <Container >
+        <StartModal
+          gameStart={this.state.gameStart}
+          toggleModal={this.toggleModal}
+        /> 
         <h1 id="title">Connect Four!</h1>
         <Row>
           <Col lg="9" >
@@ -78,6 +115,7 @@ class App extends Component {
               board={this.state.board}
               gameOver={this.state.gameOver}
               addToColumn={this.addToColumn}
+              player={this.state.player}
             />
           </Col>
           <Col lg="3"  >
