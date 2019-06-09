@@ -24,9 +24,6 @@ class App extends Component {
       gameOver: false,
       computerPlayer: false
     }
-
-    this.toggleModal = this.toggleModal.bind(this)
-    this.addToColumn = this.addToColumn.bind(this)
   }
 
   componentDidUpdate(){
@@ -78,12 +75,12 @@ class App extends Component {
     return verticalCheck || horizontalCheck >= 3 || backslashCheck >= 3 || forwardSlashCheck >=3
   }
 
-  toggleUser() {
+  toggleUser = () => {
     const player = (this.state.player % 2) + 1
     this.setState({player})
   }
 
-  computerTurn(){
+  computerTurn = () => {
     let random = Math.random() * 7
     let column = Math.floor(random)
     
@@ -94,7 +91,7 @@ class App extends Component {
     this.addToColumn(column)
   }
 
-  toggleModal(computerPlayer) {
+  toggleModal = (computerPlayer) => {
     this.setState({
       gameStart: false,
       computerPlayer
