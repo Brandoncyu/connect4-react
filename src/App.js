@@ -20,6 +20,7 @@ class App extends Component {
       board: [[], [], [], [], [], [], []],
       player: 1,
       gameOver: false,
+      computerPlayer: false,
     }
   }
 
@@ -58,6 +59,24 @@ class App extends Component {
 
     const backslashCheck = consecutiveLeftDown(board, lastRow, lastColumn, player) + consecutiveRightUp(board, lastRow, lastColumn, player)
 
+  toggleUser = () => {
+    const player = (this.state.player % 2) + 1
+    this.setState({player}, () => {
+      if (this.state.player === 2 && this.state.computerPlayer) {
+        setTimeout(this.computerTurn, 500)
+      }
+    })
+  }
+
+  computerTurn = () => {
+      let random = Math.random() * 7
+      let column = Math.floor(random)
+
+      while (this.state.board[column].length === 6) {
+        random = Math.random() * 7
+        column = Math.floor(random)
+      }
+      this.addToColumn(column)
     const forwardSlashCheck = consecutiveRightDown(board, lastRow, lastColumn, player) + consecutiveLeftUp(board, lastRow, lastColumn, player)
 
     return verticalCheck || horizontalCheck >= 3 || backslashCheck >= 3 || forwardSlashCheck >= 3
