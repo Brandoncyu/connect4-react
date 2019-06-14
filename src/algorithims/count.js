@@ -2,6 +2,7 @@ function consecutiveLeft(array, row, column, player, count = 0){
     column--
 
     let arrayCol = array[column]
+    //This is to make sure the column does not go to -1. If it does, "arrayCol" will return "undefined," and will return and the function returns the count
     if (arrayCol === undefined) return count
 
     let arrayValue = arrayCol[row]
@@ -14,6 +15,7 @@ function consecutiveLeft(array, row, column, player, count = 0){
 }
 
 function consecutiveRight(array, row, column, player, count = 0){
+    //Similar in principle to the function above, this function INCREASES the column value to look at the columns RIGHT of the last piece. The recursive statement will stop when a consecutive value does not equal the original player's value. It will return the count of number of consecutive pieces to the right that equal the original player's value.
     column++
 
     let arrayCol = array[column]
