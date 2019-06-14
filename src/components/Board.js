@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Row } from 'reactstrap'
 import Column from './Column'
 
-const Board = ({ board, gameOver, addToColumn, player }) => {
+const Board = ({ board, gameOver, addToColumn }) => {
     return (<Row id="board" noGutters={'false'}>
         {board.map((column, value) => {
             return <Column
@@ -11,7 +12,6 @@ const Board = ({ board, gameOver, addToColumn, player }) => {
                 pieces={column}
                 gameOver={gameOver}
                 addToColumn={addToColumn}
-                player={player}
             />
         })}
     </Row>)
