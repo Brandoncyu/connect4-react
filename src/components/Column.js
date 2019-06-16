@@ -34,12 +34,16 @@ class Column extends Component {
             fullColumn.push(0)
         }
         let fullColumnReverse = fullColumn.reverse()
-        return (<Col onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}>
+        return (<Col 
+                onClick={this.onClick} 
+                onMouseOver={this.onMouseOver} 
+                onMouseLeave={this.onMouseLeave}
+            >
             <Container>
                 <HoverGrid background={this.state.background} />
                 {fullColumnReverse.map((number, index) => <Grid key={index} number={number} />)}
             </Container>
-        </Col >)
+        </Col>)
     }
 
 }
